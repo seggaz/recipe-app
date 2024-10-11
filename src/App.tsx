@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import AllRecipes from './pages/AllRecipes'
+import SingleRecipe from './pages/SingleRecipe'
+import SelectedRecipes from './pages/SelectedRecipes'
+import Header from './components/Header'
+import {
+	Container,
+	CssBaseline,
+	ThemeProvider,
+	createTheme,
+} from '@mui/material'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const theme = createTheme()
 
-export default App;
+const App: React.FC = () => (
+	<ThemeProvider theme={theme}>
+		<CssBaseline />
+		<Router>
+			<Header />
+			<Container>
+				<Routes>
+					<Route path='/' element={<AllRecipes />} />
+					<Route path='/recipe/:id' element={<SingleRecipe />} />
+					<Route path='/selected' element={<SelectedRecipes />} />
+				</Routes>
+			</Container>
+		</Router>
+	</ThemeProvider>
+)
+
+export default App
